@@ -1,0 +1,163 @@
+@charset "utf-8";
+/* ===================================================================
+CSS information
+
+ file name  : common.css
+ author     : TomoChain
+ style info : maintain
+=================================================================== */
+@import "settings";
+
+/* -----------------------------------------------------------
+	Basic setting, link color etc.
+----------------------------------------------------------- */
+html {
+	font-size: small;
+	line-height: 1.5;
+}
+body {
+	margin: 0;
+	padding: 0;
+	color: $baseColor;
+	background: #fff;
+	-webkit-text-size-adjust: none;
+	@include fsz($baseSize,13);
+	.ie & { @include fsz($baseSize,13.4); }
+	@include mq(sp) {
+		@include fsz($baseSize - 1,13);
+	}
+	a {
+		color: lighten($baseColor, 10%);
+		&:link,
+		&:visited,
+		&:active {
+			text-decoration: none;
+			transition: all .4s;
+		}
+		.mouse &:hover,
+		.touch &.touchstart {
+			text-decoration: none;
+			color: lighten($baseColor, 20%);
+			transition: all .4s;
+		}
+	}
+	img {
+		max-width: 100%;
+		-webkit-touch-callout: none;
+	}
+}
+body,pre,input,textarea,select {
+	font-family: $ft_nunito;
+}
+input,select,textarea {
+	font-size: 100%;
+}
+
+// ie8
+html.ie8 {
+	.view_tab,
+	.view_tab_sp,
+	.view_sp {
+		display: none !important;
+	}
+	#page {
+		min-width: $columnWidth * 1px !important;
+		margin: auto;
+		font-size: 100% !important;
+	}
+}
+
+// .view_body
+body {
+	@include mq(pc) {
+		.view_tab-sp,.view_tab {display: none !important;}
+	}
+	@include mq(pc_tab) {
+		.view_sp {display: none !important;}
+	}
+	@include mq(tab_sp) {
+		.view_pc {display: none !important;}
+	}
+	@include mq(sp) {
+		.view_pc-tab,.view_tab {display: none !important;}
+	}
+}
+
+// .mouseOver
+.over {
+	.mouse & {
+		@include transition(opacity 200ms ease-in);
+	}
+	@include hover {
+		@include opacity(.7);
+	}
+}
+
+// border-box
+* {
+	// @include box-sizing(border-box);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,button:focus, button:active, button:hover, button:visited,
+a,a:focus, a:active, a:hover, a:visited {
+	outline: 0;
+}
+ul,li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+/* ----------
+clearfix
+---------- */
+.clearfix {
+	@extend %cf;
+}
+
+/* ----------
+container
+---------- */
+.container {
+	@extend %bw;
+	@extend %cf;
+}
+
+/* ----------
+Title
+---------- */
+.title_basic_tmp1 {
+	@include cV(margin,0 0 .5em,0 0 .5em);
+	@include fsz_r(46,36,30);
+	font-weight: bold;
+	color: #fff;
+	padding-top: 15px;
+	position: relative;
+	@include mq(tab_sp) {
+		text-align: center;
+		&:before {
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+}
+
+.title_sub_tmp1 {
+	color: #FFFFFF;
+	@include fsz_r(18,18,18);
+	@include mq(tab_sp) {
+		text-align: center;
+	}
+}
+
+.txt-blue {
+	color: #00E8B5;
+}
+
+
+

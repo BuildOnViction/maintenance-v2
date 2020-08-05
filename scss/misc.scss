@@ -1,0 +1,122 @@
+@charset "utf-8";
+/* ===================================================================
+CSS information
+
+ file name  : copy.css
+ author     : Ability Consultant
+ style info : エラーページ
+=================================================================== */
+@import "settings";
+
+/* -----------------------------------------------------------
+	con_title
+----------------------------------------------------------- */
+.con_title {
+	width: 100%;
+	@include cV(margin-bottom,120px,80px,60px);
+	.box_title {
+		width: 100%;
+		@include cV(height,400px,300px,200px);
+		background: url(../misc/images/img_main.jpg) center center;
+		background-size: cover;
+		position: relative;
+		&:after {
+				content: '';
+				width: 140px;
+				height: 2px;
+				left: 0;
+				right: 0;
+				@include cV(bottom,86px,50px,35px);
+				margin: auto;
+				background: $c_blue;
+				position: absolute;
+				z-index: 999;
+			}
+		h1 {
+			width: 100%;
+			position: absolute;
+			color: #fff;
+			letter-spacing: .25em;
+			@include cV(bottom,94px,55px,40px);
+			text-align: center;
+			@include fsz_r(40,30,20);
+		}
+	}
+}
+
+/* -----------------------------------------------------------
+	misc
+----------------------------------------------------------- */
+.con_misc {
+	@extend %bw;
+	text-align: center;
+	@include cV(margin-bottom,120px,80px,60px);
+	.cation {
+		&:before {
+			content: '\f06a';
+			font-family: FontAwesome;
+			@include fsz_r(48,46,40);
+			line-height: 1.2;
+		}
+	}
+	h3 {
+		@include fsz_r(30,20,15);
+		@include cV(margin-bottom,20px,20px,20px);
+	}
+	p {
+		@include fsz_r(20,15,10);
+		line-height: 1.8;
+		span {
+			@include fsz_r(18,16,18);
+			display: inline-block;
+			@include cV(margin-top,20px,10px,10px);
+		}
+	}
+}
+
+/* -----------------------------------------------------------
+	.con_503
+----------------------------------------------------------- */
+.con_503 {
+	width: 100%;
+	@include cV(height,95vh,95vh,80vh);
+	@extend %bw;
+	text-align: center;
+	.cation {
+		@include cV(margin-top,45px,40px,25px);
+		&:before {
+			content: '\f06a';
+			font-family: FontAwesome;
+			@include fsz_r(48,46,40);
+		}
+	}
+	h3 {
+		@include fsz_r(30,20,15);
+		@include cV(margin-top,20px,20px,20px);
+		@include cV(margin-bottom,30px,20px,20px);
+		line-height: 1.2;
+	}
+	p {
+		@include fsz_r(20,15,10);
+		line-height: 1.8;
+		span {
+			@include fsz_r(18,16,16);
+			display: inline-block;
+			@include cV(margin-top,20px,10px,10px);
+		}
+	}
+	.box_503 {
+		@include cV(width,80%,90%,90%);
+		@include cV(height,480px,400px,280px);
+		@include cV(padding,50px auto,50px auto,50px auto);
+		@extend %cf;
+		color: #fff;
+		background: $c_blue;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+	}
+}

@@ -1,0 +1,174 @@
+@charset "utf-8";
+@import "compass";
+$experimental-support-for-svg: true;
+
+//----------------------------------------------//
+// *Media Queries								//
+//----------------------------------------------//
+$bp_tab: 1024px; //tab
+$bp_sp: 767px; //sp
+
+@mixin mq($device,$val:null,$val2:null) {
+	@if $device == pc {
+	//pc
+		@media only screen and (min-width: $bp_tab + 1){@content;}
+		@media print {@content;}
+		.ie8 & {@content;}
+	}@else if $device == tab {
+	//tab
+		@media only screen and (min-width: $bp_sp + 1) and (max-width: $bp_tab){@content;}
+	}@else if $device == tab_l {
+	//tab_l
+		@media only screen and (min-width: ($bp_tab - $bp_sp) / 2 + $bp_sp + 1) and (max-width: $bp_tab){@content;}
+	}@else if $device == tab_s {
+	//tab_s
+		@media only screen and (min-width: $bp_sp + 1) and (max-width: ($bp_tab - $bp_sp) / 2 + $bp_sp){@content;}
+	}@else if $device == sp {
+	//sp
+		@media only screen and (max-width: $bp_sp){@content;}
+	}@else if $device == sp_l {
+	//sp_l
+		@media only screen and (min-width: ($bp_sp - 320) / 2 + 320+ 1) and (max-width: $bp_sp){@content;}
+	}@else if $device == sp_s {
+	//sp_s
+		@media only screen and (max-width: ($bp_sp - 320) / 2 + 320){@content;}
+	}@else if $device == pc_tab {
+	//pc & tab
+		@media only screen and (min-width: $bp_sp + 1){@content;}
+		@media print {@content;}
+		.ie8 & {@content;}
+	}@else if $device == tab_sp {
+	//tab & sp
+		@media only screen and (max-width: $bp_tab){@content;}
+	}@else if $device == min_w {
+	//max-width
+		@media only screen and (min-width: $val){@content;}
+		@media print {@content;}
+		.ie8 & {@content;}
+	}@else if $device == max_w {
+	//min-width
+		@media only screen and (max-width: $val){@content;}
+		@if $val > $bp_tab {
+			@media print {@content;}
+			.ie8 & {@content;}
+		}
+	}@else if $device == min_max_w {
+	//min-width ~ max-width
+		@media only screen and (min-width: $val) and (max-width: $val2){@content;}
+		@if $val2 > $bp_tab {
+			@media print {@content;}
+			.ie8 & {@content;}
+		}
+	}@else if $device == min_h {
+	//max-height
+		@media only screen and (min-height: $val){@content;}
+	}@else if $device == max_h {
+	//min-height
+		@media only screen and (max-height: $val){@content;}
+	}@else if $device == min_max_h {
+	//min-height ~ max-height
+		@media only screen and (min-height: $val) and (max-height: $val2){@content;}
+	}
+}
+
+
+//----------------------------------------------//
+// *Variable									//
+//----------------------------------------------//
+
+$columnWidth: 1100;
+$baseSize: 14;
+$baseColor: #333333;
+
+$ic_fa: "FontAwesome";
+$ft_nunito: 'Nunito Sans', sans-serif;
+
+
+//----------------------------------------------//
+// *Placeholder									//
+//----------------------------------------------//
+
+// baceWidth
+%bw {
+	max-width: $columnWidth + px;
+	margin: auto;
+	@include mq(tab_sp) {
+		width: 95%;
+	}
+}
+
+// clearFix
+%cf {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+
+//----------------------------------------------//
+// *Function									//
+//----------------------------------------------//
+
+// width
+@function wCon($width,$parentWidth:$columnWidth) {
+	@return $width / $parentWidth * 100%;
+}
+
+
+//----------------------------------------------//
+// *mixin										//
+//----------------------------------------------//
+
+// font
+@mixin fsz($size:$baseSize,$parent:null){
+	$i: $size * (100 / $baseSize);
+
+	@if $parent == null {
+		font-size: ceil($i * 1%);
+	}@else {
+		font-size: ceil(100% * ($size / $parent));
+	}
+}
+
+@mixin fsz_r($pc, $tab, $sp){
+	@include fsz($pc);
+	@include mq(tab) {
+		@include fsz($tab);
+	} @include mq(sp) {
+		@include fsz($sp);
+	}
+}
+
+// choiceValue
+@mixin cV($pro, $v1:0, $v2:0, $v3:null) {
+	#{$pro} : $v1;
+	@if $v3 == null {
+		@include mq(sp) {
+			#{$pro} : $v2;
+		}
+	}@else {
+		@include mq(tab) {
+			#{$pro} : $v2;
+		}
+		@include mq(sp) {
+			#{$pro} : $v3;
+		}
+	}
+}
+
+@mixin hover() {
+	.mouse &:hover,
+	.touch &.touchstart {
+		@content;
+	}
+	.touch & {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		&.touchend {
+			@include transition-delay(200ms);
+		}
+	}
+}
+
+
